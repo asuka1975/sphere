@@ -8,3 +8,9 @@ target_include_directories(sphere PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/glplusplus
 target_link_libraries(sphere GL GLEW glfw gl++)
 
 add_subdirectory(glplusplus)
+
+file(GLOB shaders shaders/*)
+foreach(shader IN ITEMS ${shaders})
+    get_filename_component(name ${shader} NAME)
+    configure_file(${shader} shaders/${name} COPYONLY)
+endforeach()
